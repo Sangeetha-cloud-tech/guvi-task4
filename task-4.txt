@@ -1,0 +1,256 @@
+1.1st program:
+package guvitask4;
+
+public class Student {
+	static int rollno, age;
+	static String name,course;
+	Student(int rollno1,int age1,String name1, String course1)
+	{
+		rollno=rollno1;
+		age=age1;
+		name=name1;
+		course=course1;
+	}
+		public static void voteAge(int n) throws AgeNotWithinRangeException
+		{
+			
+			if((n<15)&&(n>21))
+		
+		{
+			System.out.println("Age is within the range");		//AgeNotWithinRangeException class created using throw and throws																																										
+		}
+		else 
+		{
+			throw new AgeNotWithinRangeException("Age is not within the range");
+		}
+		
+		}
+		public static void voteName(String name1) throws NameNotValidException
+		{
+			name=name1;
+			int i,d=0;
+			for(i=0;i<name.length();i++)
+			{
+				char a=name.charAt(i);
+								//NameNotValidException-Exception class created using throw and throws
+				if(!Character.isLetter(a))
+				{
+					d++;
+				}
+			}
+			
+			if(d==0)
+			{
+				System.out.println("All are words");
+			}else 
+			{
+				throw new NameNotValidException("The given name is not valid");
+			}
+		}
+				
+		
+	public static void main(String args[])
+	{
+		new Student(001,25,"Sangeetha.M","CSE");
+	try
+	{
+		voteAge(25);
+	}								//try and catch statements calling exception classes...
+	catch(AgeNotWithinRangeException e)
+	{
+		e.printStackTrace();
+	}
+	
+	try
+	{
+		voteName("Sangeetha.M");
+	}
+	catch(NameNotValidException ae)
+	{
+		ae.printStackTrace();
+	}
+}
+}
+--------------------------------------------------------------------------
+package guvitask4;
+import java.lang.*;
+
+public class AgeNotWithinRangeException extends Exception
+{								//	AgeNotWithinRangeException class(user defined Exception class for age)																										
+	AgeNotWithinRangeException(String msg)
+	{
+		super(msg);
+	}
+
+}
+
+---------------------------------------------------------------------------
+package guvitask4;
+import java.lang.*;
+public class NameNotValidException extends Exception 
+{								//NameNotValidException class(user defined Exception class for name)
+	NameNotValidException(String msg)
+	{
+		super(msg);
+	}
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+2.nd program...
+package guvitask4;
+
+public class Voter
+{
+static int age,voterid;
+static String name;
+Voter(int age1,int voterid1,String name1)throws AgeNotWithinRangeException
+{
+	age=age1;
+	voterid=voterid1;
+	name=name1;
+	if(age>18)
+	{
+		System.out.println("Valid age for voting");			//class defined with AgeNotWithinRangeException....this was created for past program but as mentioned in same 													package and as having the same usage...it is called here.....
+	}
+	else
+	{
+		throw new AgeNotWithinRangeException("invalid age for voter");
+	}
+}
+public static void main(String args[])
+{
+	try 										//try and catch statements are used....
+	{
+	new Voter(14,1001,"Sangeetha");
+	}
+	catch(AgeNotWithinRangeException e)
+	{
+		e.printStackTrace();
+	}
+}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.3rd program
+package guvitask4;
+
+import java.util.*;
+
+public class OutOfBoundException 
+{
+	public static void main(String args[])throws ArrayIndexOutOfBoundsException
+	{
+		Scanner sc=new Scanner(System.in);
+		int k;
+	ArrayList<String> a1=new ArrayList<>();
+	a1.add(0,"Sunday");
+	a1.add(1,"Monday");
+	a1.add(2,"Tuesday");
+	a1.add(3,"Wednesday");									//Arraylist is created and ArrayIndexOutOfBoundsException is used ...
+	a1.add(4,"Thursday");
+	a1.add(5,"Friday");
+	a1.add(6,"Saturday");
+	try
+	{
+	System.out.println("enter the day-position");
+	k=sc.nextInt();
+	if((k>=0)&&(k<=6))
+	{
+		System.out.println("The day name is: "+a1.get(k));
+	
+	}												//try and catch statement..
+	else
+	{
+		throw new ArrayIndexOutOfBoundsException("The given day-position does not exist");
+	}
+	}
+	catch(ArrayIndexOutOfBoundsException e)
+	{
+		e.printStackTrace();
+	}
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4th program......
+package guvitask4;
+
+import java.util.*;
+
+public class HashMap1
+	{
+	 static Map<String,Integer> h=new HashMap<>();
+	static {
+	h.put("Sangeetha",10);
+	h.put("Geetha",9);
+	h.put("Sam",10);
+	h.put("Arun",5);						//hashmap...adding the value initially....
+	h.put("Rakesh",7);
+	}
+	
+	void add(String name1,int n)
+	{								//add method....
+		h.put(name1,n);
+	}
+	void remove(String name1,int n)
+	{								//remove method.....
+		h.remove(name1,n);
+	}
+	void display()
+	{
+		for(Map.Entry<String,Integer> e:h.entrySet())
+		{									//display method..
+			
+			System.out.println(e.getKey()+" "+e.getValue());
+		}
+	}
+	public static void main(String args[])
+	{
+		HashMap1 hs=new HashMap1();
+		System.out.println("....HashMap.....");
+		System.out.println("The initial values are:");
+		hs.display();
+		System.out.println("After adding values:");					//calling methods in main class..
+		hs.add("Anitha",10);
+		hs.display();
+		System.out.println("After removing the specified values:");
+		hs.remove("Sam", 10);
+		hs.display();
+		
+	}
+	}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.5th program...
+package guvitask4;
+import java.util.*;
+
+public class Stack1
+{
+	public static void main(String args[])
+	{
+		System.out.println("...Stack....");
+		boolean result;							//in stack adding valuesss...
+		Stack<Integer> st=new Stack<Integer>();
+		st.push(78);
+		st.push(89);
+		st.push(56);
+		st.push(80);
+		Iterator it=st.iterator();
+		while(it.hasNext()) 
+		{									//iteration...
+			System.out.println(it.next());
+		}
+		System.out.println("The popped element is"+st.pop());			//pop...
+		System.out.println("The peeked element is"+st.peek());				//peek...
+		result=st.empty();
+		if(result)
+		{
+			System.out.println("The stack is empty");
+		}
+		else									//checking the stack is empty.....
+		{
+			System.out.println("The stack is not empty");
+		}
+		
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------------
